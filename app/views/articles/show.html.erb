@@ -1,11 +1,68 @@
+<header>
+    <div class="container">
+        <div style="height: 120px; background-color: skyblue; padding-left:50px;" class="d-flex align-items-center">
+             <h1>SUNA's Board</h1>
+            </div>
+    </div>
+</header>
+
+<div class="container mt-4 px-5">
 <p>
     <strong>Title:</strong>
     <%= @article.title %>
 </p>
 
+
 <p>
     <strong>Content:</strong>
-    <%= @article.content %>
+    <pre><%= @article.content %></pre>
 </p>
 
-<%= link_to 'Articles List',articles_path %> 
+
+<div class="container">
+    
+<%= link_to edit_article_path do %>
+<button type="button" class="btn btn-outline-info">수정</button>
+<%end%>
+
+ 
+    
+<%= link_to article_path , method: :delete do %>
+<button type="button" class="btn btn-outline-info">삭제</button>
+
+<%end%>
+
+
+    
+<%= link_to articles_path do %>
+<button type="button" class="btn btn-outline-info">목록</button>
+<%end%>
+
+</div>
+<br>
+<p>
+<h3>comments</h3>
+<ul id="comments">
+    <% @article.comments.each do |comment| %>
+    <li>
+       
+        <%= comment.content %>
+        
+        <%= link_to '삭제', comment_path(comment), :method => :delete,
+            data: {confirm: "정말로 삭제하시겠습니까?"}%>
+    </li>
+    <%end%>
+ </ul>
+ </p>
+ <p>
+     
+     <%= form_for :comment, url: article_comments_path(@article.id) do |f| %>
+    
+     <%= f.text_area(:content, size: "10x5", class: 'form-control') %>
+     
+     <%= f.submit 'submit' , class: 'btn btn-outline-info' %>
+     
+     <%end%>
+ </p>
+ 
+</div>

@@ -1,17 +1,24 @@
-<h1>New Article</h1>
+<header>
+    <div class="container">
+        <div style="height: 120px; background-color: skyblue; padding-left:50px;" class="d-flex align-items-center">Write</div>
+    </div>
+</header>
 
+<div class ="container mt-4 px-5" style=  "width :60%;">
 <%= form_for :article, url: '/articles/' do |f| %>
     <p>
         <%= f.label :title %><br>
-        <%= f.text_field :title %>
+        <%= f.text_field :title , class: 'form-control' %>
     </p>
+   
     
     <p>
         <%=f.label :content %><br>
-        <%= f.text_field :content %>
+        <%= f.text_area(:content, size: "20x10", class: 'form-control') %>
     </p>
     
     <p>
-        <%= f.submit %>
+        <%= f.submit 'submit' , class: 'btn btn-outline-info' %>
     </p>
 <% end %>
+</div>

@@ -1,18 +1,50 @@
-<h1>listening articles</h1>
+<header>
+    <div class="container">
+        <div style="height: 120px; background-color: skyblue; padding-left:50px;" class="d-flex align-items-center">
+            
+                <h1>SUNA's Board</h1>
+               
+        </div>
+    </div>
+</header>
 
-<table>
-    <tr>
-        <th>title</th>
-        <th>content</th>
-    </tr>
+<div class="container mt-4 px-5">
+<table class="table table-hover">
+      <table class="table">
+        <colgroup>
+            <col style="width:10%;">
+            <col style="width:20%;">
+            <col style="width:40%;">
+            <col style="width:15%;">
+        </colgroup>
     
-    <% @articles.each do |article| %>
+  <thead>
     <tr>
-        <td><%= article.title %></td>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Content</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+          <% @articles.each do |article| %>
+    <tr>
+        <td><%= article.id %> </td>
+        <td><%= link_to "#{article.title}", article_path(article)  %></td>
         <td><%= article.content %></td>
-        <td><%= link_to 'show', article_path(article) %></td>
+        <td><%= article.created_at.strftime("%y/%m/%d %R") %></td>
     </tr>
     <% end %>
+    
+  </tbody>
 </table>
+</div>
 
-<%= link_to 'New article' , new_article_path %>
+<div class="container">
+    <div style= "text-align : right;">
+<%= link_to new_article_path do %>
+<button type="button" class="btn btn-outline-info">Write</button>
+<%end%>
+</div>
+</div>
+
